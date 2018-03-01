@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { SimpleTimer } from 'ng2-simple-timer';
+import { RssService } from './rss.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -10,9 +13,14 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
+
   ],
-  providers: [],
+  providers: [
+  	SimpleTimer,
+  	RssService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
