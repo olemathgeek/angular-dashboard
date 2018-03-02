@@ -10,8 +10,8 @@ import { RssService } from './rss.service';
 export class AppComponent {
 	title = 'app';
 
-	printDate = 'abc';
-	printTime = 'time';
+	printDate:any = 'abc';
+	printTime:any = 'time';
 	data = [];
 
 	counter0 = 0;
@@ -52,7 +52,7 @@ export class AppComponent {
 			console.log('timer 0 Unsubscribed.');
 		} else {
 			// Subscribe if timer Id is undefined
-			this.timer0Id = this.st.subscribe('1sec', e => this.timer0callback());
+			this.timer0Id = this.st.subscribe('1sec', () => this.timer0callback());
 			this.timer0button = 'Unsubscribe';
 			console.log('timer 0 Subscribed.');
 		}
@@ -68,7 +68,7 @@ export class AppComponent {
 			console.log('timer 1 Unsubscribed.');
 		} else {
 			// Subscribe if timer Id is undefined
-			this.timer1Id = this.st.subscribe('5sec', e => this.timer1callback());
+			this.timer1Id = this.st.subscribe('5sec', () => this.timer1callback());
 			this.timer1button = 'Unsubscribe';
 			console.log('timer 1 Subscribed.');
 		}
@@ -84,7 +84,7 @@ export class AppComponent {
 			console.log('timer 2 Unsubscribed.');
 		} else {
 			// Subscribe if timer Id is undefined
-			this.timer2Id = this.st.subscribe('10sec', e => this.timer2callback());
+			this.timer2Id = this.st.subscribe('10sec', () => this.timer2callback());
 			this.timer2button = 'Unsubscribe';
 			console.log('timer 2 Subscribed.');
 		}
