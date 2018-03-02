@@ -9,8 +9,16 @@ export class RssService {
   constructor(private http: HttpClient) {
   }
 
-  getRss(): Observable<any> {
+  getRssDefault(): Observable<any> {
     return this.http.get(this.apiUrl);
+  }
+
+  getRss(url): Observable<any> {
+    return this.http.get(url);
+  }
+
+  getNprRss(): Observable<any> {
+    return this.getRss('https://rss2json.com/api.json?rss_url=https://www.npr.org/rss/rss.php?id=103943429');
   }
 
 }

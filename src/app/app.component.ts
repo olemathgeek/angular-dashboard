@@ -104,8 +104,8 @@ export class AppComponent {
 	 //// this.printDate = dateFormat(new Date(), 'D, M d, Y');
 		this.printDate = new Date()//.format('D, M d, Y');
 	 //// this.printDate = 'emily';
-	 this.rssService.getRss().toPromise().then(data => {
-          this.data = data;
+	 this.rssService.getNprRss().toPromise().then(data => {
+          this.data = data.items;
           console.log(data);
   });
 	 
