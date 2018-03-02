@@ -21,4 +21,8 @@ export class RssService {
     return this.getRss('https://rss2json.com/api.json?rss_url=https://www.npr.org/rss/rss.php?id=103943429');
   }
 
+  getDisneyRss(): Observable<any> {
+    return this.getRss('https://rss2json.com/api.json?rss_url=http://feeds.feedburner.com/disneyparks');
+  }
+
 }

@@ -5,14 +5,15 @@ import { RssService } from './rss.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 	title = 'app';
 
 	printDate:any = 'abc';
 	printTime:any = 'time';
-	data = [];
+	npr = [];
+	disney = [];
 
 	counter0 = 0;
 	timer0Id: string;
@@ -30,7 +31,7 @@ export class AppComponent {
 
 	ngOnInit() {
 		this.st.newTimer('1sec',1);
-		this.st.newTimer('10sec',10);
+		this.st.newTimer('300sec',300);
 		this.st.newTimer('60sec',60);
 		this.subscribeTimer0();
 		this.subscribeTimer1();
@@ -92,23 +93,29 @@ export class AppComponent {
 	}
 
 	timer0callback() {
+	//every 1 seconds
 	  this.printDate = new Date();
 		this.counter0++;
 	}
 
 	timer1callback() {
+	//every 5 minutes
+	//http://api.wunderground.com/api/ebe965a96fa2346b/conditions/q/MN/Osseo.json
 		this.counter1++;
 	}
 
 	timer2callback() {
-	 //// this.printDate = dateFormat(new Date(), 'D, M d, Y');
+	//every 1 minutes
 		this.printDate = new Date()//.format('D, M d, Y');
-	 //// this.printDate = 'emily';
-	 this.rssService.getNprRss().toPromise().then(data => {
-          this.data = data.items;
-          console.log(data);
-  });
+	 	this.rssService.getNprRss().toPromise().then(data => {
+        	this.npr = data.items;
+  		});
+	 	this.rssService.getDisneyRss().toPromise().then(data => {
+        	this.disney = data.items;
+        	console.log(data.items);
+  		});
 	 
+
 		this.counter2++;
 	}
 
