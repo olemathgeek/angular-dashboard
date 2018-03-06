@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SimpleTimer } from 'ng2-simple-timer';
 import { RssService } from './rss.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { WeatherService } from './weather.service';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
   ],
   providers: [
   	SimpleTimer,
-  	RssService
+    RssService,
+    WeatherService
   ],
   bootstrap: [AppComponent]
 })

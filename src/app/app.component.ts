@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SimpleTimer } from 'ng2-simple-timer';
 import { RssService } from './rss.service';
+import { WeatherService } from './weather.service';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,11 @@ export class AppComponent {
 	printTime:any = 'time';
 	npr = [];
 	disney = [];
+	forecast = [];
+	conditions = [];
 
-	constructor(private st: SimpleTimer, private rssService: RssService) { }
+	constructor(private st: SimpleTimer, private rssService: RssService,
+		private weatherService: WeatherService) { }
 
 	ngOnInit() {
 		this.st.newTimer('1sec',1);
@@ -45,21 +49,27 @@ export class AppComponent {
 
 	timer300callback() {
 	// every 5 minutes
-	// http://api.wunderground.com/api/ebe965a96fa2346b/conditions/q/MN/Osseo.json
-	}
+	this.weatherService.getForecast().toPromise().then(data => {
+		this.forecast = data.forecast;
+		console.log('forecast:');
+		console.log(this.forecast);
+	  });
+	this.weatherService.getConditions().toPromise().then(data => {
+		this.conditions = data.current_observation;
+		console.log('conditions:');
+		console.log(this.conditions);
+	  });
+
+}
 
 	timer60callback() {
 	//every 1 minutes
 		this.printDate = new Date()//.format('D, M d, Y');
 	 	this.rssService.getNprRss().toPromise().then(data => {
 			this.npr = data.items;
-			console.log('npr:');
-			console.log(data);
   		});
 	 	this.rssService.getDisneyRss().toPromise().then(data => {
         	this.disney = data.items;
-			console.log('disney:');
-			console.log(data);
   		});
 	}
 

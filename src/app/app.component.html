@@ -1,82 +1,81 @@
 <table class="full-width full-height">
   <tr class="quarter-height">
     <td class="half-width">
-      <h3>{{title}}</h3>
-      <div>{{printDate}}</div>
-      <div>{{printTime}}</div>
+      <h3>{{printDate.toString().substring(0,25)}}</h3>
+      <div>
+        <img alt="conditions" src="{{conditions.icon_url}}">
+        {{conditions.temp_f}} F, feels like {{conditions.feelslike_f}}
+      </div>
     </td>
     <td>
-      <h3>Weather Goes Here?</h3>
-    </td>
-  </tr>
-  <tr class="full-height" style="border-top: 1px solid;">
-    <td class="half-width full-height">
-        <table class="full-width full-height">
-          <tr *ngIf="npr[0]">
-            <td>
-              <h2>{{npr[0].title}}</h2>
-              <p>{{npr[0].pubDate}}</p>
-              <p>{{npr[0].description}}</p>
-            </td>
-            <td>
-              <img width="300" alt="News image" src="{{npr[0].thumbnail}}">
-            </td>
-          </tr>
-          <tr *ngIf="npr[1]">
-            <td>
-              <h2>{{npr[1].title}}</h2>
-              <p>{{npr[1].pubDate}}</p>
-              <p>{{npr[1].description}}</p>
-            </td>
-            <td>
-              <img width="300" alt="News image" src="{{npr[1].thumbnail}}">
-            </td>
-          </tr>
-          <tr *ngIf="npr[2]">
-            <td>
-              <h2>{{npr[2].title}}</h2>
-              <p>{{npr[2].pubDate}}</p>
-              <p>{{npr[2].description}}</p>
-            </td>
-            <td>
-              <img width="300" alt="News image" src="{{npr[2].thumbnail}}">
-            </td>
-          </tr>
-        </table>
-    </td>
-    <td class="full-width full-height">
-      <table class="full-width full-height">
-        <tr *ngIf="disney[0]">
+      <table>
+        <tr>
           <td>
-            <h2>{{disney[0].title}}</h2>
-            <p>{{disney[0].pubDate}}</p>
-            <p>{{disney[0].description}}</p>
-          </td>
+              <img alt="forecast" src="{{forecast.txt_forecast.forecastday[0].icon_url}}">
+          </td>  
           <td>
-            <img width="300" alt="News image" src="{{disney[0].thumbnail}}">
+              <h3>{{forecast.txt_forecast.forecastday[0].title}}</h3>
+              <div>{{forecast.txt_forecast.forecastday[0].fcttext}}</div>        
           </td>
         </tr>
-        <tr *ngIf="disney[1]">
+        <tr>
           <td>
-            <h2>{{disney[1].title}}</h2>
-            <p>{{disney[1].pubDate}}</p>
-            <p>{{disney[1].description}}</p>
+              <img alt="forecast" src="{{forecast.txt_forecast.forecastday[1].icon_url}}">
           </td>
           <td>
-            <img width="300" alt="News image" src="{{disney[1].thumbnail}}">
+              <h3>{{forecast.txt_forecast.forecastday[1].title}}</h3>
+              <div>{{forecast.txt_forecast.forecastday[1].fcttext}}</div>        
           </td>
         </tr>
-        <tr *ngIf="disney[1]">
+        <tr>
           <td>
-            <h2>{{disney[2].title}}</h2>
-            <p>{{disney[2].pubDate}}</p>
-            <p>{{disney[2].description}}</p>
+              <img alt="forecast" src="{{forecast.txt_forecast.forecastday[2].icon_url}}">
           </td>
           <td>
-            <img width="300" alt="News image" src="{{disney[2].thumbnail}}">
+              <h3>{{forecast.txt_forecast.forecastday[2].title}}</h3>
+              <div>{{forecast.txt_forecast.forecastday[2].fcttext}}</div>        
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <img alt="forecast" src="{{forecast.txt_forecast.forecastday[3].icon_url}}">
+          </td>
+          <td>
+              <h3>{{forecast.txt_forecast.forecastday[3].title}}</h3>
+              <div>{{forecast.txt_forecast.forecastday[3].fcttext}}</div>        
           </td>
         </tr>
       </table>
     </td>
+  </tr>
+  <tr class="full-height" style="border-top: 1px solid;">
+    <td class="half-width full-height" style="vertical-align: top">
+        <table class="full-width full-height">
+          <tr *ngFor="let story of npr; let i = index;">
+            <td>
+              <h2>{{story.title}}</h2>
+              <p>{{story.pubDate}}</p>
+              <p>{{story.description}}</p>
+            </td>
+            <td>
+              <img width="300" alt="News image" src="{{story.thumbnail}}">
+            </td>
+          </tr>
+        </table>
+    </td>
+    <td class="full-width full-height" style="vertical-align: top">
+        <table class="full-width full-height">
+            <tr *ngFor="let story of disney; let i = index;">
+              <td>
+                <h2>{{story.title}}</h2>
+                <p>{{story.pubDate}}</p>
+                <p>{{story.description}}</p>
+              </td>
+              <td>
+                <img width="300" alt="News image" src="{{story.thumbnail}}">
+              </td>
+            </tr>
+          </table>
+      </td>
   </tr>
 </table>
