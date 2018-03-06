@@ -12,7 +12,7 @@
   <tr class="full-height" style="border-top: 1px solid;">
     <td class="half-width full-height">
         <table class="full-width full-height">
-          <tr>
+          <tr *ngIf="npr[0]">
             <td>
               <h2>{{npr[0].title}}</h2>
               <p>{{npr[0].pubDate}}</p>
@@ -22,7 +22,7 @@
               <img width="300" alt="News image" src="{{npr[0].thumbnail}}">
             </td>
           </tr>
-          <tr>
+          <tr *ngIf="npr[1]">
             <td>
               <h2>{{npr[1].title}}</h2>
               <p>{{npr[1].pubDate}}</p>
@@ -32,7 +32,7 @@
               <img width="300" alt="News image" src="{{npr[1].thumbnail}}">
             </td>
           </tr>
-          <tr>
+          <tr *ngIf="npr[2]">
             <td>
               <h2>{{npr[2].title}}</h2>
               <p>{{npr[2].pubDate}}</p>
@@ -46,7 +46,7 @@
     </td>
     <td class="full-width full-height">
       <table class="full-width full-height">
-        <tr>
+        <tr *ngIf="disney[0]">
           <td>
             <h2>{{disney[0].title}}</h2>
             <p>{{disney[0].pubDate}}</p>
@@ -56,7 +56,7 @@
             <img width="300" alt="News image" src="{{disney[0].thumbnail}}">
           </td>
         </tr>
-        <tr>
+        <tr *ngIf="disney[1]">
           <td>
             <h2>{{disney[1].title}}</h2>
             <p>{{disney[1].pubDate}}</p>
@@ -66,7 +66,7 @@
             <img width="300" alt="News image" src="{{disney[1].thumbnail}}">
           </td>
         </tr>
-        <tr>
+        <tr *ngIf="disney[1]">
           <td>
             <h2>{{disney[2].title}}</h2>
             <p>{{disney[2].pubDate}}</p>
