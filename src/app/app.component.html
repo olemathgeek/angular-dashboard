@@ -1,14 +1,18 @@
 <table class="full-width full-height">
-  <tr class="quarter-height">
+  <tr class="third-height">
     <td class="half-width">
-      <h3>{{printDate.toString().substring(0,25)}}</h3>
-      <div>
-        <img alt="conditions" src="{{conditions.icon_url}}">
-        {{conditions.temp_f}} F, feels like {{conditions.feelslike_f}}
+      <h2>{{printDate.toString().substring(0,25)}}</h2>
+      <div *ngIf="conditions">
+        <img alt="conditions.weather" src="{{conditions.icon_url}}">
+        <h2>{{conditions.weather}}</h2>
+        <h3>{{conditions.temp_f}} F, feels like {{conditions.feelslike_f}}</h3>
+        <h3>{{conditions.relative_humidity}}% ({{conditions.precip_today_in}}in precip)</h3>
+        <h3>Wind {{conditions.wind_dir}} at {{conditions.wind_mph}}, gusts {{conditions.wind_gust_mph}}mph</h3>
+        <!-- conditions.feelslike_f, conditions.icon, conditions.precip_today_in, conditions.relative_humidity, conditions.temp_f, conditions.weather, conditions.wind_gust_mph -->
       </div>
     </td>
     <td>
-      <table>
+      <table *ngIf="forecast && forecast.txt_forecast">
         <tr>
           <td>
               <img alt="forecast" src="{{forecast.txt_forecast.forecastday[0].icon_url}}">
@@ -69,7 +73,7 @@
               <td>
                 <h2>{{story.title}}</h2>
                 <p>{{story.pubDate}}</p>
-                <p>{{story.description}}</p>
+                <!-- <p>{{story.description}}</p> -->
               </td>
               <td>
                 <img width="300" alt="News image" src="{{story.thumbnail}}">

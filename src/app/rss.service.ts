@@ -18,7 +18,13 @@ export class RssService {
   }
 
   getDisneyRss(): Observable<any> {
+    return this.getRss(this.rootUrl + 'https://twitrss.me/twitter_user_to_rss/?user=wdwnt');
+  }
+
+  getDisneyRssOld(): Observable<any> {
     return this.getRss(this.rootUrl + 'http://feeds.feedburner.com/disneyparks');
   }
+
+
 
 }

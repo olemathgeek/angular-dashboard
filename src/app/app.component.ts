@@ -22,33 +22,31 @@ export class AppComponent {
 		private weatherService: WeatherService) { }
 
 	ngOnInit() {
-		this.st.newTimer('1sec',1);
-		this.st.newTimer('300sec',300);
-		this.st.newTimer('60sec',60);
-		this.subscribeTimer1();
-		this.subscribeTimer300();
-		this.subscribeTimer60();
+		this.st.newTimer('dateTime',1);
+		this.st.newTimer('weather',600);
+		this.st.newTimer('news',60);
+		this.subscribeTimerDateTime();
+		this.subscribeTimerWeather();
+		this.subscribeTimerNews();
 	}
 
-	subscribeTimer1() {
-		this.st.subscribe('1sec', () => this.timer1callback());
+	subscribeTimerDateTime() {
+		this.st.subscribe('dateTime', () => this.timerDateTimeCallback());
 	}
 
-	subscribeTimer300() {
-		this.st.subscribe('300sec', () => this.timer300callback());
+	subscribeTimerWeather() {
+		this.st.subscribe('weather', () => this.timerWeatherCallback());
 	}
 
-	subscribeTimer60() {
-		this.st.subscribe('60sec', () => this.timer60callback());
+	subscribeTimerNews() {
+		this.st.subscribe('news', () => this.timerNewsCallback());
 	}
 
-	timer1callback() {
-	// //every 1 seconds
+	timerDateTimeCallback() {
 	  this.printDate = new Date();
 	}
 
-	timer300callback() {
-	// every 5 minutes
+	timerWeatherCallback() {
 	this.weatherService.getForecast().toPromise().then(data => {
 		this.forecast = data.forecast;
 		console.log('forecast:');
@@ -62,15 +60,30 @@ export class AppComponent {
 
 }
 
-	timer60callback() {
-	//every 1 minutes
-		this.printDate = new Date()//.format('D, M d, Y');
+	timerNewsCallback() {
+		//this.printDate = new Date()//.format('D, M d, Y');
 	 	this.rssService.getNprRss().toPromise().then(data => {
-			this.npr = data.items;
+			this.npr = data.items
+				.sort(this.sortByPubDate)
+				.filter((item, index) => index < 3 );
   		});
 	 	this.rssService.getDisneyRss().toPromise().then(data => {
-        	this.disney = data.items;
+	 		console.log(data.items);
+        	this.disney = data.items
+        		.sort(this.sortByPubDate)
+        		.filter((item, index) => index < 5 );
   		});
 	}
 
+	sortByPubDate(a,b) {
+		if (a.pubDate > b.pubDate) {
+		    return -1;
+		}
+		if (a.pubDate < b.pubDate) {
+			return 1;
+		}
+
+		// names must be equal
+		return 0;
+	}
 }
