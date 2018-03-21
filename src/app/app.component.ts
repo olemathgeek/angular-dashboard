@@ -72,6 +72,12 @@ export class AppComponent {
         	this.disney = data.items
         		.sort(this.sortByPubDate)
         		.filter((item, index) => index < 3 );
+        	for(const entry of this.disney){
+        		const picIndex = entry.title.indexOf('pic.twitter.com');
+        		if(picIndex > -1){
+        			entry.title = entry.title.substring(0, picIndex);
+        		}
+        	}
   		});
 	}
 
