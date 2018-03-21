@@ -48,14 +48,17 @@ export class AppComponent {
 
 	timerWeatherCallback() {
 	this.weatherService.getForecast().toPromise().then(data => {
-		this.forecast = data.forecast;
-		console.log('forecast:');
-		console.log(this.forecast);
+		if(data && data.forecast && data.forecast.txt_forecast){
+			this.forecast = data.forecast.txt_forecast.forecastday
+			    .filter((item, index) => index < 4 );
+			// console.log('forecast:');
+			// console.log(this.forecast);
+		}
 	  });
 	this.weatherService.getConditions().toPromise().then(data => {
 		this.conditions = data.current_observation;
-		console.log('conditions:');
-		console.log(this.conditions);
+		// console.log('conditions:');
+		// console.log(this.conditions);
 	  });
 
 }

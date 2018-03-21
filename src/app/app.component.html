@@ -5,48 +5,21 @@
       <div *ngIf="conditions">
         <img alt="conditions.weather" src="{{conditions.icon_url}}">
         <h2>{{conditions.weather}}</h2>
-        <h3>{{conditions.temp_f}} F, feels like {{conditions.feelslike_f}}</h3>
+        <h2>{{conditions.temp_f}} F, feels like {{conditions.feelslike_f}}</h2>
         <h3>{{conditions.relative_humidity}}% ({{conditions.precip_today_in}}in precip)</h3>
         <h3>Wind {{conditions.wind_dir}} at {{conditions.wind_mph}}, gusts {{conditions.wind_gust_mph}}mph</h3>
         <!-- conditions.feelslike_f, conditions.icon, conditions.precip_today_in, conditions.relative_humidity, conditions.temp_f, conditions.weather, conditions.wind_gust_mph -->
       </div>
     </td>
     <td>
-      <table *ngIf="forecast && forecast.txt_forecast">
-        <tr>
+      <table>
+        <tr *ngFor="let forecastItem of forecast;">
           <td>
-              <img alt="forecast" src="{{forecast.txt_forecast.forecastday[0].icon_url}}">
+              <img alt="forecast" src="{{forecastItem.icon_url}}">
           </td>  
           <td>
-              <h3>{{forecast.txt_forecast.forecastday[0].title}}</h3>
-              <div>{{forecast.txt_forecast.forecastday[0].fcttext}}</div>        
-          </td>
-        </tr>
-        <tr>
-          <td>
-              <img alt="forecast" src="{{forecast.txt_forecast.forecastday[1].icon_url}}">
-          </td>
-          <td>
-              <h3>{{forecast.txt_forecast.forecastday[1].title}}</h3>
-              <div>{{forecast.txt_forecast.forecastday[1].fcttext}}</div>        
-          </td>
-        </tr>
-        <tr>
-          <td>
-              <img alt="forecast" src="{{forecast.txt_forecast.forecastday[2].icon_url}}">
-          </td>
-          <td>
-              <h3>{{forecast.txt_forecast.forecastday[2].title}}</h3>
-              <div>{{forecast.txt_forecast.forecastday[2].fcttext}}</div>        
-          </td>
-        </tr>
-        <tr>
-          <td>
-              <img alt="forecast" src="{{forecast.txt_forecast.forecastday[3].icon_url}}">
-          </td>
-          <td>
-              <h3>{{forecast.txt_forecast.forecastday[3].title}}</h3>
-              <div>{{forecast.txt_forecast.forecastday[3].fcttext}}</div>        
+              <h2>{{forecastItem.title}}</h2>
+              <h3>{{forecastItem.fcttext}}</h3>        
           </td>
         </tr>
       </table>
