@@ -71,7 +71,7 @@ export class AppComponent {
 	 		console.log(data.items);
         	this.disney = data.items
         		.sort(this.sortByPubDate)
-        		.filter((item, index) => index < 5 );
+        		.filter((item, index) => index < 3 );
   		});
 	}
 
