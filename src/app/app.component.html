@@ -1,17 +1,16 @@
-<table class="full-width full-height">
-  <tr class="third-height">
-    <td class="half-width">
-      <h2>{{printDate.toString().substring(0,25)}}</h2>
+<table class="full-width third-height">
+  <tr class="full-height">
+    <td class="third-width" style="text-align: center;">
+      <h1>{{printDate.toString().substring(0,25)}}</h1>
       <div *ngIf="conditions">
         <img alt="conditions.weather" src="{{conditions.icon_url}}">
-        <h2>{{conditions.weather}}</h2>
-        <h2>{{conditions.temp_f}} F, feels like {{conditions.feelslike_f}}</h2>
-        <h3>{{conditions.relative_humidity}}% ({{conditions.precip_today_in}}in precip)</h3>
-        <h3>Wind {{conditions.wind_dir}} at {{conditions.wind_mph}}, gusts {{conditions.wind_gust_mph}}mph</h3>
-        <!-- conditions.feelslike_f, conditions.icon, conditions.precip_today_in, conditions.relative_humidity, conditions.temp_f, conditions.weather, conditions.wind_gust_mph -->
+        <h1>{{conditions.weather}}</h1>
+        <h1>{{conditions.temp_f}} F, feels like {{conditions.feelslike_f}}</h1>
+        <h2>{{conditions.relative_humidity}} humidity ({{conditions.precip_today_in}}in precip)</h2>
+        <h2>Wind {{conditions.wind_dir}} at {{conditions.wind_mph}}, gusts {{conditions.wind_gust_mph}}mph</h2>
       </div>
     </td>
-    <td>
+    <td class="full-width full-height">
       <table>
         <tr *ngFor="let forecastItem of forecast;">
           <td>
@@ -19,18 +18,20 @@
           </td>  
           <td>
               <h2>{{forecastItem.title}}</h2>
-              <h3>{{forecastItem.fcttext}}</h3>        
+              <h2>{{forecastItem.fcttext}}</h2>        
           </td>
         </tr>
       </table>
     </td>
   </tr>
+</table>
+<table class="full-height full-width">
   <tr class="full-height" style="border-top: 1px solid;">
     <td class="half-width full-height" style="vertical-align: top">
         <table class="full-width full-height">
           <tr *ngFor="let story of npr; let i = index;">
             <td>
-              <h2>{{story.title}}</h2>
+              <h1>{{story.title}}</h1>
               <p>{{story.pubDate}}</p>
               <p>{{story.description}}</p>
             </td>
@@ -44,7 +45,7 @@
         <table class="full-width full-height">
             <tr *ngFor="let story of disney; let i = index;">
               <td>
-                <h2>{{story.title}}</h2>
+                <h1>{{story.title}}</h1>
                 <p>{{story.pubDate}}</p>
                 <!-- <p>{{story.description}}</p> -->
               </td>

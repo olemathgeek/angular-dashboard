@@ -68,13 +68,13 @@ export class AppComponent {
 	 	this.rssService.getNprRss().toPromise().then(data => {
 			this.npr = data.items
 				.sort(this.sortByPubDate)
-				.filter((item, index) => index < 3 );
+				.filter((item, index) => index < 2 );
   		});
 	 	this.rssService.getDisneyRss().toPromise().then(data => {
 	 		console.log(data.items);
         	this.disney = data.items
         		.sort(this.sortByPubDate)
-        		.filter((item, index) => index < 3 );
+        		.filter((item, index) => index < 2 );
         	for(const entry of this.disney){
         		const picIndex = entry.title.indexOf('pic.twitter.com');
         		if(picIndex > -1){
