@@ -48,11 +48,18 @@ export class AppComponent {
 
 	timerWeatherCallback() {
 	this.weatherService.getForecast().toPromise().then(data => {
-		if(data && data.forecast && data.forecast.txt_forecast){
-			this.forecast = data.forecast.txt_forecast.forecastday
+		// this is for sentences forecasts
+		// if(data && data.forecast && data.forecast.txt_forecast){
+		//	this.forecast = data.forecast.txt_forecast.forecastday
+		//	    .filter((item, index) => index < 4 );
+		//	console.log('forecast:');
+		//	console.log(data);
+		// }
+		if(data && data.forecast && data.forecast.simpleforecast){
+			this.forecast = data.forecast.simpleforecast.forecastday
 			    .filter((item, index) => index < 4 );
-			// console.log('forecast:');
-			// console.log(this.forecast);
+			console.log('forecast:');
+			console.log(this.forecast);
 		}
 	  });
 	this.weatherService.getConditions().toPromise().then(data => {
@@ -71,7 +78,6 @@ export class AppComponent {
 				.filter((item, index) => index < 2 );
   		});
 	 	this.rssService.getDisneyRss().toPromise().then(data => {
-	 		console.log(data.items);
         	this.disney = data.items
         		.sort(this.sortByPubDate)
         		.filter((item, index) => index < 2 );

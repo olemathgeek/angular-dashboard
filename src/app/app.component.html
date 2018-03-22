@@ -12,6 +12,22 @@
     </td>
     <td class="full-width full-height">
       <table>
+        <tr>
+          <td *ngFor="let forecastItem of forecast;" style="text-align: center; vertical-align: top; padding-left: 20px; padding-right: 20px;">
+            <h1>{{forecastItem.date.weekday_short}}</h1>
+            <img alt="{{forecastItem.icon}}" src="{{forecastItem.icon_url}}">
+            <h1>{{forecastItem.conditions}}</h1>
+            <h1>{{forecastItem.high.fahrenheit}}/{{forecastItem.low.fahrenheit}}</h1>
+            <h2>Wind {{forecastItem.avewind.dir}} at {{forecastItem.avewind.mph}}</h2>
+            <h2>{{forecastItem.avehumidity}}% humidity</h2>
+
+            <h1>{{forecastItem.pop}}%</h1>
+            <h2 *ngIf="forecastItem.qpf_allday.in > 0">{{forecastItem.qpf_allday.in}}in precip</h2>
+            <h2 *ngIf="forecastItem.snow_allday.in > 0">{{forecastItem.snow_allday.in}}in snow</h2>
+          </td>
+        </tr>
+      </table>
+<!--       <table>
         <tr *ngFor="let forecastItem of forecast;">
           <td>
               <img alt="forecast" src="{{forecastItem.icon_url}}">
@@ -21,7 +37,7 @@
               <h2>{{forecastItem.fcttext}}</h2>        
           </td>
         </tr>
-      </table>
+      </table> -->
     </td>
   </tr>
 </table>
