@@ -51,7 +51,7 @@
               <p>{{story.pubDate}}</p>
               <p>{{story.description}}</p>
             </td>
-            <td>
+            <td *ngIf="story.thumbnail">
               <img width="300" alt="News image" src="{{story.thumbnail}}">
             </td>
           </tr>
@@ -65,7 +65,7 @@
                 <p>{{story.pubDate}}</p>
                 <!-- <p>{{story.description}}</p> -->
               </td>
-              <td>
+              <td *ngIf="story.thumbnail">
                 <img width="300" alt="News image" src="{{story.thumbnail}}">
               </td>
             </tr>

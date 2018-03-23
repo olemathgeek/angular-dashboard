@@ -86,6 +86,11 @@ export class AppComponent {
         		if(picIndex > -1){
         			entry.title = entry.title.substring(0, picIndex);
         		}
+
+        		const urlIndex = entry.title.indexOf('http');
+        		if(urlIndex > -1){
+        			entry.title = entry.title.substring(0, urlIndex);
+        		}
         	}
   		});
 	}
