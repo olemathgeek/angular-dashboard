@@ -1,7 +1,8 @@
 <table class="full-width third-height">
   <tr class="full-height">
     <td class="third-width" style="text-align: center;">
-      <h1>{{printDate.toString().substring(0,25)}}</h1>
+      <h1>{{printDate}}</h1>
+      <h1 style="font-size: 3em;">{{printTime}}</h1>
       <div *ngIf="conditions">
         <img alt="conditions.weather" src="{{conditions.icon_url}}">
         <h1>{{conditions.weather}}</h1>

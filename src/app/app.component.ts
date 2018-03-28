@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SimpleTimer } from 'ng2-simple-timer';
 import { RssService } from './rss.service';
 import { WeatherService } from './weather.service';
+import { DateTime } from '@wazio/date-time';
 
 @Component({
   selector: 'app-root',
@@ -43,29 +44,30 @@ export class AppComponent {
 	}
 
 	timerDateTimeCallback() {
-	  this.printDate = new Date();
+		this.printDate = DateTime.format(new Date(), 'MM-dd-yyyy');
+		this.printTime = DateTime.format(new Date(), 'hh:mm:ss tt');
 	}
 
 	timerWeatherCallback() {
-	this.weatherService.getForecast().toPromise().then(data => {
-		// this is for sentences forecasts
-		// if(data && data.forecast && data.forecast.txt_forecast){
-		//	this.forecast = data.forecast.txt_forecast.forecastday
-		//	    .filter((item, index) => index < 4 );
-		//	console.log('forecast:');
-		//	console.log(data);
-		// }
-		if(data && data.forecast && data.forecast.simpleforecast){
-			this.forecast = data.forecast.simpleforecast.forecastday
-			    .filter((item, index) => index < 4 );
-			console.log('forecast:');
-			console.log(this.forecast);
-		}
+		this.weatherService.getForecast().toPromise().then(data => {
+			// this is for sentences forecasts
+			// if(data && data.forecast && data.forecast.txt_forecast){
+			//	this.forecast = data.forecast.txt_forecast.forecastday
+			//	    .filter((item, index) => index < 4 );
+			//	console.log('forecast:');
+			//	console.log(data);
+			// }
+			if(data && data.forecast && data.forecast.simpleforecast){
+				this.forecast = data.forecast.simpleforecast.forecastday
+						.filter((item, index) => index < 4 );
+				// console.log('forecast:');
+				// console.log(this.forecast);
+			}
 	  });
-	this.weatherService.getConditions().toPromise().then(data => {
-		this.conditions = data.current_observation;
-		// console.log('conditions:');
-		// console.log(this.conditions);
+		this.weatherService.getConditions().toPromise().then(data => {
+			this.conditions = data.current_observation;
+			// console.log('conditions:');
+			// console.log(this.conditions);
 	  });
 
 }
