@@ -44,8 +44,8 @@ export class AppComponent {
 	}
 
 	timerDateTimeCallback() {
-		this.printDate = DateTime.format(new Date(), 'MM-dd-yyyy');
-		this.printTime = DateTime.format(new Date(), 'hh:mm:ss tt');
+		this.printDate = DateTime.format(new Date(), 'M/d/yyyy');
+		this.printTime = DateTime.format(new Date(), 'h:mm:ss tt');
 	}
 
 	timerWeatherCallback() {
@@ -80,7 +80,8 @@ export class AppComponent {
 				.filter((item, index) => index < 2 );
   		});
 	 	this.rssService.getDisneyRss().toPromise().then(data => {
-        	this.disney = data.items
+					this.disney = data.items
+						.filter((item, index) => item.title.indexOf('ICYMI') === -1)
         		.sort(this.sortByPubDate)
         		.filter((item, index) => index < 2 );
         	for(const entry of this.disney){
