@@ -14,8 +14,8 @@ export class RssService {
   }
 
   getNprRss(): Observable<any> {
-    return this.getRss('https://www.npr.org/feeds/1001/feed.json');
-    // return this.getRss(this.rootUrl + 'https://www.npr.org/rss/rss.php?id=1001');
+    // return this.getRss('https://www.npr.org/feeds/1001/feed.json');
+    return this.getRss(this.rootUrl + 'https://www.npr.org/rss/rss.php?id=1001');
     // BROKEN return this.getRss(this.rootUrl + 'https://www.npr.org/rss/rss.php?id=103943429');
   }
 
