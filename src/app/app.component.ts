@@ -12,8 +12,8 @@ import { DateTime } from '@wazio/date-time';
 export class AppComponent {
   title = 'app';
 
-  printDate:any = 'abc';
-  printTime:any = 'time';
+  printDate: any = 'abc';
+  printTime: any = 'time';
   npr = [];
   disney = [];
   forecast = [];
@@ -23,9 +23,9 @@ export class AppComponent {
     private weatherService: WeatherService) { }
 
   ngOnInit() {
-    this.st.newTimer('dateTime',1);
-    this.st.newTimer('weather',600);
-    this.st.newTimer('news',60);
+    this.st.newTimer('dateTime', 1);
+    this.st.newTimer('weather', 600);
+    this.st.newTimer('news', 60);
     this.subscribeTimerDateTime();
     this.subscribeTimerWeather();
     this.subscribeTimerNews();
@@ -57,17 +57,27 @@ export class AppComponent {
       //  console.log('forecast:');
       //  console.log(data);
       // }
-      if(data && data.forecast && data.forecast.simpleforecast){
-        this.forecast = data.forecast.simpleforecast.forecastday
-            .filter((item, index) => index < 4 );
-        console.log('forecast:');
-        console.log(data);
+      // this.forecast = data.list;
+
+      // console.log('forecast:');
+      // console.log(data.list);
+
+      if (data && data.list) {
+        this.forecast = data.list
+            .filter((item, index) => index < 8 );
+        for (const info of this.forecast) {
+          info.dateObj = new Date(info.dt_txt.replace(' ', 'T'));
+          info.timeString = DateTime.format(info.dateObj, 'h tt');
+        }
+        // console.log('forecast:');
+        // console.log(this.forecast);
       }
+
     });
     this.weatherService.getConditions().toPromise().then(data => {
       this.conditions = data;
-      console.log('conditions:');
-      console.log(data);
+      // console.log('conditions:');
+      // console.log(data);
     });
 
 }
@@ -85,21 +95,29 @@ export class AppComponent {
             .filter((item, index) => item.title.indexOf('ICYMI') === -1)
             .sort(this.sortByPubDate)
             .filter((item, index) => index < 2 );
-          for(const entry of this.disney){
+          for (const entry of this.disney) {
             const picIndex = entry.title.indexOf('pic.twitter.com');
-            if(picIndex > -1){
+            if (picIndex > -1) {
               entry.title = entry.title.substring(0, picIndex);
             }
 
             const urlIndex = entry.title.indexOf('http');
-            if(urlIndex > -1){
+            if (urlIndex > -1) {
               entry.title = entry.title.substring(0, urlIndex);
             }
           }
-      });
+      }, (reason => {
+        // console.log('DISNEY FAILED');
+        this.rssService.getDisneyRssOld().toPromise().then(data => {
+          this.disney = data.items
+            .sort(this.sortByPubDate)
+            .filter((item, index) => index < 2);
+        });
+      }));
+
   }
 
-  sortByPubDate(a,b) {
+  sortByPubDate(a, b) {
     if (a.pubDate > b.pubDate) {
         return -1;
     }
