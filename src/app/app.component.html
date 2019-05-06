@@ -4,11 +4,13 @@
       <h1>{{printDate}}</h1>
       <h1 style="font-size: 3em;">{{printTime}}</h1>
       <div *ngIf="conditions">
-        <img width="100" alt="conditions.weather[0].description" src="{{'http://openweathermap.org/img/w/' + conditions.weather[0].icon + '.png'}}">
-        <h1>{{conditions.weather[0].description}}</h1>
-        <h1>{{((conditions.main.temp - 273) * (9 / 5)) + 32 | number :'1.0-1'}} F, humidity {{conditions.main.humidity}}%</h1>
-        <h2>Min {{((conditions.main.temp_min - 273) * (9 / 5)) + 32 | number :'1.0-0'}}, Max {{((conditions.main.temp_max - 273) * (9 / 5)) + 32 | number :'1.0-0'}}</h2>
-        <h2>{{conditions.relative_humidity}} humidity ({{conditions.precip_today_in}}in precip)</h2>
+        <img width="100" alt="conditions.weather[0].main" src="{{'http://openweathermap.org/img/w/' + conditions.weather[0].icon + '.png'}}">
+        <!-- <h1>{{conditions.weather[0].main}}</h1> -->
+        <h2>{{conditions.weather[0].description}}</h2>
+        <h1>{{((conditions.main.temp - 273) * (9 / 5)) + 32 | number :'1.0-1'}} F</h1>
+        <!-- <h2>Min {{((conditions.main.temp_min - 273) * (9 / 5)) + 32 | number :'1.0-0'}}, Max {{((conditions.main.temp_max - 273) * (9 / 5)) + 32 | number :'1.0-0'}}</h2> -->
+        <h2>{{conditions.main.humidity}}% humidity</h2>
+        <!-- <h2>{{conditions.relative_humidity}} humidity ({{conditions.precip_today_in}}in precip)</h2> -->
         <!-- <h2>Wind {{conditions.wind_dir}} at {{conditions.wind_mph}}, gusts {{conditions.wind_gust_mph}}mph</h2> -->
       </div>
     </td>
@@ -16,16 +18,22 @@
       <table>
         <tr>
           <td *ngFor="let forecastItem of forecast;" style="text-align: center; vertical-align: top; padding-left: 20px; padding-right: 20px;">
-            <h1>{{forecastItem.date.weekday_short}}</h1>
-            <img alt="{{forecastItem.icon}}" src="{{forecastItem.icon_url}}">
-            <h1>{{forecastItem.conditions}}</h1>
-            <h1>{{forecastItem.high.fahrenheit}}/{{forecastItem.low.fahrenheit}}</h1>
-            <h2>Wind {{forecastItem.avewind.dir}} at {{forecastItem.avewind.mph}}</h2>
-            <h2>{{forecastItem.avehumidity}}% humidity</h2>
+            <!-- <h1>{{forecastItem.dt_txt}}</h1> -->
+            <h1>{{forecastItem.timeString}}</h1>
+            <img width="100" alt="forecastItem.weather[0].main" src="{{'http://openweathermap.org/img/w/' + forecastItem.weather[0].icon + '.png'}}">
+            <!-- <h1>{{forecastItem.weather[0].main}}</h1> -->
+            <h2>{{forecastItem.weather[0].description}}</h2>
+            <h1>{{((forecastItem.main.temp - 273) * (9 / 5)) + 32 | number :'1.0-0'}} F</h1>
+            <h2>{{forecastItem.main.humidity}}% humidity</h2>
+            <!-- <h2>Min {{((forecastItem.main.temp_min - 273) * (9 / 5)) + 32 | number :'1.0-0'}}, Max {{((forecastItem.main.temp_max - 273) * (9 / 5)) + 32 | number :'1.0-0'}}</h2> -->
 
-            <h1>{{forecastItem.pop}}%</h1>
+            <!-- <h1>{{forecastItem.high.fahrenheit}}/{{forecastItem.low.fahrenheit}}</h1>
+            <h2>Wind {{forecastItem.avewind.dir}} at {{forecastItem.avewind.mph}}</h2>
+            <h2>{{forecastItem.avehumidity}}% humidity</h2> -->
+
+            <!-- <h1>{{forecastItem.pop}}%</h1>
             <h2 *ngIf="forecastItem.qpf_allday.in > 0">{{forecastItem.qpf_allday.in}}in precip</h2>
-            <h2 *ngIf="forecastItem.snow_allday.in > 0">{{forecastItem.snow_allday.in}}in snow</h2>
+            <h2 *ngIf="forecastItem.snow_allday.in > 0">{{forecastItem.snow_allday.in}}in snow</h2> -->
           </td>
         </tr>
       </table>
