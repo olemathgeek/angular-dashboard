@@ -4,11 +4,12 @@
       <h1>{{printDate}}</h1>
       <h1 style="font-size: 3em;">{{printTime}}</h1>
       <div *ngIf="conditions">
-        <img alt="conditions.weather" src="{{conditions.icon_url}}">
-        <h1>{{conditions.weather}}</h1>
-        <h1>{{conditions.temp_f}} F, feels like {{conditions.feelslike_f}}</h1>
+        <img width="100" alt="conditions.weather[0].description" src="{{'http://openweathermap.org/img/w/' + conditions.weather[0].icon + '.png'}}">
+        <h1>{{conditions.weather[0].description}}</h1>
+        <h1>{{((conditions.main.temp - 273) * (9 / 5)) + 32 | number :'1.0-1'}} F, humidity {{conditions.main.humidity}}%</h1>
+        <h2>Min {{((conditions.main.temp_min - 273) * (9 / 5)) + 32 | number :'1.0-0'}}, Max {{((conditions.main.temp_max - 273) * (9 / 5)) + 32 | number :'1.0-0'}}</h2>
         <h2>{{conditions.relative_humidity}} humidity ({{conditions.precip_today_in}}in precip)</h2>
-        <h2>Wind {{conditions.wind_dir}} at {{conditions.wind_mph}}, gusts {{conditions.wind_gust_mph}}mph</h2>
+        <!-- <h2>Wind {{conditions.wind_dir}} at {{conditions.wind_mph}}, gusts {{conditions.wind_gust_mph}}mph</h2> -->
       </div>
     </td>
     <td class="full-width full-height">
@@ -32,10 +33,10 @@
         <tr *ngFor="let forecastItem of forecast;">
           <td>
               <img alt="forecast" src="{{forecastItem.icon_url}}">
-          </td>  
+          </td>
           <td>
               <h2>{{forecastItem.title}}</h2>
-              <h2>{{forecastItem.fcttext}}</h2>        
+              <h2>{{forecastItem.fcttext}}</h2>
           </td>
         </tr>
       </table> -->

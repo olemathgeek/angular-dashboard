@@ -19,11 +19,11 @@ export class RssService {
     // BROKEN return this.getRss(this.rootUrl + 'https://www.npr.org/rss/rss.php?id=103943429');
   }
 
-  getDisneyRss(): Observable<any> {
+  getDisneyRssOld(): Observable<any> {
     return this.getRss(this.rootUrl + 'https://twitrss.me/twitter_user_to_rss/?user=wdwnt');
   }
 
-  getDisneyRssOld(): Observable<any> {
+  getDisneyRss(): Observable<any> {
     return this.getRss(this.rootUrl + 'http://feeds.feedburner.com/disneyparks');
   }
 

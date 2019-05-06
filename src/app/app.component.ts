@@ -60,14 +60,14 @@ export class AppComponent {
       if(data && data.forecast && data.forecast.simpleforecast){
         this.forecast = data.forecast.simpleforecast.forecastday
             .filter((item, index) => index < 4 );
-        // console.log('forecast:');
-        // console.log(this.forecast);
+        console.log('forecast:');
+        console.log(data);
       }
     });
     this.weatherService.getConditions().toPromise().then(data => {
-      this.conditions = data.current_observation;
-      // console.log('conditions:');
-      // console.log(this.conditions);
+      this.conditions = data;
+      console.log('conditions:');
+      console.log(data);
     });
 
 }
@@ -75,7 +75,7 @@ export class AppComponent {
   timerNewsCallback() {
     // this.printDate = new Date()//.format('D, M d, Y');
      this.rssService.getNprRss().toPromise().then(data => {
-       console.log(data);
+      //  console.log(data);
       this.npr = data.items
         .sort(this.sortByPubDate)
         .filter((item, index) => index < 2 );
